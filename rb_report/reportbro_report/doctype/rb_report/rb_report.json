@@ -1,0 +1,115 @@
+{
+ "autoname": "field:report_name",
+ "creation": "2020-08-14 11:15:40.202214",
+ "doctype": "DocType",
+ "document_type": "System",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "report_name",
+  "section_break_2",
+  "parameters",
+  "styles",
+  "version",
+  "rb_html",
+  "document_properties",
+  "doc_elements",
+  "section_break_9",
+  "context_path",
+  "section_break_11",
+  "definition"
+ ],
+ "fields": [
+  {
+   "fieldname": "report_name",
+   "fieldtype": "Data",
+   "label": "Report Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "parameters",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "Parameters"
+  },
+  {
+   "fieldname": "styles",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "Styles"
+  },
+  {
+   "fieldname": "version",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Version"
+  },
+  {
+   "fieldname": "rb_html",
+   "fieldtype": "HTML",
+   "label": "RB HTML"
+  },
+  {
+   "fieldname": "document_properties",
+   "fieldtype": "Text",
+   "hidden": 1,
+   "label": "Document Properties"
+  },
+  {
+   "fieldname": "doc_elements",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "Doc Elements"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "dotted.path_to_method which should return a dictionary of parameters used in report",
+   "fieldname": "context_path",
+   "fieldtype": "Data",
+   "label": "Context Path"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Actual ReportBro definition. Just for reference for the curious.",
+   "fieldname": "definition",
+   "fieldtype": "Long Text",
+   "label": "Definition",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break",
+   "label": "Report Definition"
+  }
+ ],
+ "hide_toolbar": 1,
+ "modified": "2020-08-14 16:11:37.720055",
+ "modified_by": "Administrator",
+ "module": "ReportBro Report",
+ "name": "RB Report",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "report_name"
+}
