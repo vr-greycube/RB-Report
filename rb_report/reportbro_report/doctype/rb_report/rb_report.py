@@ -5,6 +5,8 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
+from frappe.utils import cint
+from six import string_types, iteritems
 from reportbro import *
 import json
 import io
@@ -20,14 +22,14 @@ class RBReport(Document):
             "version": self.version
         }
 
-    def get_pdf(self, **params):
-        context = params.get("context") or dict()
-
-        print(params)
-        print(type(context), context)
+    def get_pdf(self, context=None, as_download=False, **params):
 
         if not context and self.context_path:
-            context = frappe.get_module(self.context_path)(**params)
+            context = getattr(frappe.get_module(
+                self.context_path), "get_context")(**params)
+
+        if not context:
+            context = dict()
 
         report_definition = self.get_definition()
         report = Report(report_definition, data=context)
@@ -37,18 +39,26 @@ class RBReport(Document):
             # unless you saved an invalid report and didn't test in ReportBro Designer
             raise ReportBroError(report.errors[0])
 
-        return report.generate_pdf(), context.get("file_name") or "%s.pdf" % frappe.utils.now_datetime()
+        pdf = report.generate_pdf()
+        file_name = context.get(
+            "file_name") or "%s.pdf" % frappe.utils.now_datetime()
+
+        if cint(as_download):
+            frappe.response.filename = file_name
+            frappe.response.filecontent = io.BytesIO(pdf).getvalue()
+            frappe.response.type = "download"
+
+        return report.generate_pdf(),
 
 
 @frappe.whitelist()
-def get_pdf_preview(report_name, data=None):
+def get_pdf(report_name, **args):
+    context = args.get("context") or dict()
+    if isinstance(context, string_types):
+        context = json.loads(context)
 
-    if data:
-        data = json.loads(data)
+    if args.get("context"):
+        args.pop("context")
 
     doc = frappe.get_doc("RB Report", report_name)
-    pdf_report, file_name = doc.get_pdf(**dict(context=data))
-
-    frappe.response.filename = file_name
-    frappe.response.filecontent = io.BytesIO(pdf_report).getvalue()
-    frappe.response.type = "download"
+    doc.get_pdf(context=context, as_download=True, **args)
