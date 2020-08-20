@@ -15,10 +15,9 @@ frappe.ui.form.on("RB Report", {
     frappe.rbr = $("#rb-report").reportBro({
       saveCallback: frm.events.validate,
       //   preview: frm.events.preview_report,
-      // additionalFonts: [
-      //   { name: "Tangerine", value: "tangerine" },
-      //   { name: "Firefly", value: "firefly" },
-      // ],
+      additionalFonts: [
+        // { name: "Noto Sans CJK SC Regular", value: "Noto Sans CJK SC Regular" },
+      ],
     });
   },
 

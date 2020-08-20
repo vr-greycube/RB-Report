@@ -10,6 +10,7 @@ from six import string_types, iteritems
 from reportbro import *
 import json
 import io
+from reportbro import *
 
 
 class RBReport(Document):
@@ -31,8 +32,13 @@ class RBReport(Document):
         if not context:
             context = dict()
 
+        additional_fonts = []
+        # additional_fonts = [dict(
+        #     value='Noto Sans CJK SC Regular', filename='/usr/share/fonts/opentype/noto/NotoSansSC-Regular.otf')]
+
         report_definition = self.get_definition()
-        report = Report(report_definition, data=context)
+        report = Report(report_definition, data=context,
+                        additional_fonts=additional_fonts)
 
         if report.errors:
             # report definition should never contain any errors,
