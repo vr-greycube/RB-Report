@@ -33,8 +33,8 @@ class RBReport(Document):
             context = dict()
 
         additional_fonts = []
-        # additional_fonts = [dict(
-        #     value='Noto Sans CJK SC Regular', filename='/usr/share/fonts/opentype/noto/NotoSansSC-Regular.otf')]
+        additional_fonts = [dict(
+            value='Arial Unicode MS', filename='/usr/share/fonts/truetype/msttcorefonts/Arial_Unicode_MS.ttf')]
 
         report_definition = self.get_definition()
         report = Report(report_definition, data=context,

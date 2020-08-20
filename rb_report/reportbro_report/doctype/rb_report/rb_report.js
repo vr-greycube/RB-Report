@@ -17,6 +17,7 @@ frappe.ui.form.on("RB Report", {
       //   preview: frm.events.preview_report,
       additionalFonts: [
         // { name: "Noto Sans CJK SC Regular", value: "Noto Sans CJK SC Regular" },
+        { name: "Arial Unicode MS", value: "Arial Unicode MS" },
       ],
     });
   },
